@@ -17,9 +17,9 @@ datasetServer <- function(id) {
 
   shiny::moduleServer(id, function(input, output, session) {
 
-    shiny::reactive(
-        get(input$dataset, "package:datasets")
-      )
+    shiny::reactive({
+          get(input$dataset, "package:datasets")
+        })
 
   })
 }

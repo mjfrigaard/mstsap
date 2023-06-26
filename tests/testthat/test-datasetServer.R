@@ -3,15 +3,15 @@ shiny::testServer(datasetServer, expr = {
   testthat::expect_equal(
     object = input$dataset,
     expected = "faithful")
-  cat("\n\tdatasetServer: dataset$input", "\n")
+  cat("\n\tdatasetServer: dataset$input")
 
   session$setInputs(dataset = "mtcars")
   testthat::expect_true(
     object = is.data.frame(session$returned()))
-  cat("\n\tdatasetServer is.data.frame()", "\n")
+  cat("\n\tdatasetServer: is.data.frame()")
 
   session$setInputs(dataset = "mtcars")
   expect_equal(object = names(session$returned()),
     expected = names(mtcars))
-  cat("\n\tdatasetServer names()", "\n")
+  cat("\n\tdatasetServer: names()", "\n")
 })

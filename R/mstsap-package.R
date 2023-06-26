@@ -6,8 +6,8 @@
 ## usethis namespace: start
 ##
 #' @importFrom pkgload load_all
-#' @import zeallot
 #' @import rlang
+#' @importFrom dplyr select where filter pull contains mutate glimpse arrange
 #' @importFrom rsconnect deployApp
 #'
 #'

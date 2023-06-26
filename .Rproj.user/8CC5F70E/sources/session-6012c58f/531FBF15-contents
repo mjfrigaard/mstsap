@@ -1,0 +1,18 @@
+#' Data and variable input UI module
+#'
+#' @description
+#' This module function comes from the [Modules inside of modules](https://mastering-shiny.org/scaling-modules.html#modules-inside-of-modules) section of Mastering Shiny.
+#'
+#' @param id module id
+#'
+#'
+#' @return shiny UI function
+#' @export
+#'
+#' @importFrom shiny tagList
+mod_select_data_var_ui <- function(id) {
+  shiny::tagList(
+    mod_dataset_ui(NS(id, "data"), filter = is.data.frame),
+    mod_select_var_ui(NS(id, "var"))
+  )
+}

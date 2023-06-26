@@ -1,0 +1,24 @@
+{
+    "id": "7AC0B6BF",
+    "path": "~/projects/apps/mstsap/tests/testthat/_test-mod_ds_server.R",
+    "project_path": "tests/testthat/_test-mod_ds_server.R",
+    "type": "r_source",
+    "hash": "2508285995",
+    "contents": "",
+    "dirty": true,
+    "created": 1687796364135.0,
+    "source_on_save": false,
+    "relative_order": 16,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1687782945,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1687796368448,
+    "read_only": false,
+    "read_only_alternatives": []
+}

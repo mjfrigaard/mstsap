@@ -1,0 +1,11 @@
+name: pkgDataApp
+title: pkgDataApp
+username:
+account: mjfrigaard
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9194337
+bundleId: 7343225
+url: https://mjfrigaard.shinyapps.io/pkgDataApp/
+when: 1686720820.40193
+lastSyncTime: 1686720820.40194

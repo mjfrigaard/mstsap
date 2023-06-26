@@ -1,0 +1,33 @@
+---
+title: "Inputs and outputs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Inputs and outputs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5,
+  fig.height = 3.5,
+  dpi = 140,
+  fig.retina = TRUE
+)
+```
+
+```{r}
+#| label: pkgs
+#| message: false
+#| warning: false
+library(mstsap)
+library(janitor)
+library(NHANES)
+library(palmerpenguins)
+```
+

@@ -1,0 +1,24 @@
+{
+    "id": "7BDFFD25",
+    "path": "~/projects/apps/mstsap/R/selectDataVarUI.R",
+    "project_path": "R/selectDataVarUI.R",
+    "type": "r_source",
+    "hash": "1750313221",
+    "contents": "",
+    "dirty": false,
+    "created": 1687796097605.0,
+    "source_on_save": false,
+    "relative_order": 14,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1687796128,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1687796128,
+    "read_only": false,
+    "read_only_alternatives": []
+}

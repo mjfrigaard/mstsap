@@ -1,0 +1,24 @@
+{
+    "id": "ABF0EF5F",
+    "path": "~/projects/apps/mstsap/tests/testthat/test-selectVarServer.R",
+    "project_path": "tests/testthat/test-selectVarServer.R",
+    "type": "r_source",
+    "hash": "438288300",
+    "contents": "",
+    "dirty": false,
+    "created": 1687795507885.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1687796075,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1687796075,
+    "read_only": false,
+    "read_only_alternatives": []
+}

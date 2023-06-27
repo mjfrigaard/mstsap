@@ -32,7 +32,7 @@ library(mstsap)
 
 ## Utility function tests
 
-There are two utility functions in `mstsap`: 
+There is a single utility function in `mstsap`: `find_vars()`
 
 ```{r}
 #| eval: true
@@ -46,33 +46,7 @@ testthat::test_file("tests/testthat/test-find_vars.R")
 ```
 
 ```{verbatim}
-#> [ FAIL 0 | WARN 0 | SKIP 0 | PASS 2 ]
-```
-
-```{r}
-#| eval: false
-testthat::test_file("tests/testthat/test-find_data_vars.R")
-```
-
-```{verbatim}
 #> [ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
-```
-
-`find_vars()` works, but not with non-`data.frame` objects
-
-```{r}
-#| collapse: false
-find_vars(data = airquality, filter = is.integer)
-find_vars(data = state.abb, filter = is.character)
-```
-
-`find_data_vars()` throws an error: 
-
-```{r}
-#| error: true
-#| collapse: false
-find_data_vars(data = airquality, filter = is.integer)
-find_data_vars(data = state.abb, filter = is.character)
 ```
 
 

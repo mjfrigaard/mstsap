@@ -11,4 +11,10 @@ testthat::test_that("find_vars", {
       dplyr::select(where(is.character)) |>
       names())
 
+  testthat::expect_error(object =
+      find_vars(datasets::state.abb, filter = is.character))
+
+  testthat::expect_error(object =
+      find_vars(datasets::mtcars, filter = is.miracle))
+
 })

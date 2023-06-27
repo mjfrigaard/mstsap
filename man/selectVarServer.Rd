@@ -11,7 +11,7 @@ selectVarServer(id, data, filter = is.numeric)
 
 \item{data}{reactive data object to retrieve variables from}
 
-\item{filter}{passed to \code{find_vars()}, i.e., the variables to list. \emph{This will be set by the caller of the module, so doesn’t need to be reactive}}
+\item{filter}{passed to \code{find_vars()}, i.e., the type of variables to list (\emph{this will be set by the caller of the module, so doesn’t need to be reactive}}
 }
 \value{
 shiny server function
@@ -22,6 +22,6 @@ This module function comes from the \href{https://mastering-shiny.org/scaling-mo
 \section{stopifnot()}{
 
 
-\emph{check that each input to your module is either reactive or constant. If you don’t, and the user supplies the wrong type, they’ll get a cryptic error message. You can make the life of module user much easier with a quick and dirty call to stopifnot()}
+\emph{check that each input to your module is either reactive or constant. If you don’t, and the user supplies the wrong type, they’ll get a cryptic error message. You can make the life of module user much easier with a quick and dirty call to \code{stopifnot()}}
 }
 

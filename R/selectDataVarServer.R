@@ -15,6 +15,7 @@ selectDataVarServer <- function(id, filter = is.numeric) {
   shiny::moduleServer(id, function(input, output, session) {
 
     data <- datasetServer("data")
+
     var <- selectVarServer("var", data, filter = filter)
 
     var

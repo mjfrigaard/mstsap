@@ -27,7 +27,6 @@ knitr::opts_chunk$set(
 #| warning: false
 library(mstsap)
 library(janitor)
-library(NHANES)
 library(palmerpenguins)
 ```
 

@@ -14,6 +14,7 @@
 #'
 #' @importFrom shiny selectInput NS
 datasetInput <- function(id, filter = NULL) {
+
   names <- ls("package:datasets")
   if (!is.null(filter)) {
     data <- lapply(names, get, "package:datasets")

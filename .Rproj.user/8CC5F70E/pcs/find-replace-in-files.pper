@@ -1,15 +1,15 @@
 {
     "dialog-state": {
-        "query": "mod_select_data_var_server",
+        "query": "find_data_vars",
         "path": "",
         "regex": false,
         "caseSensitive": true,
         "wholeWord": false,
         "filePatterns": [],
-        "useGitGrep": false,
+        "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 7,
+        "resultsCount": 21,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true

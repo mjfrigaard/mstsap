@@ -24,10 +24,9 @@ library(mstsap)
 
 ## Utility function tests
 
-There are two utility functions in `mstsap`:
+There is a single utility function in `mstsap`: `find_vars()`
 
     #> tests/testthat/
-    #> ├── test-find_data_vars.R
     #> └── test-find_vars.R
 
 ``` r
@@ -35,44 +34,8 @@ testthat::test_file("tests/testthat/test-find_vars.R")
 ```
 
 ``` default
-#> [ FAIL 0 | WARN 0 | SKIP 0 | PASS 2 ]
-```
-
-``` r
-testthat::test_file("tests/testthat/test-find_data_vars.R")
-```
-
-``` default
 #> [ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
 ```
-
-`find_vars()` works, but not with non-`data.frame` objects
-
-``` r
-find_vars(data = airquality, filter = is.integer)
-```
-
-    #> [1] "Ozone"   "Solar.R" "Temp"    "Month"   "Day"
-
-``` r
-find_vars(data = state.abb, filter = is.character)
-```
-
-    #> NULL
-
-`find_data_vars()` throws an error:
-
-``` r
-find_data_vars(data = airquality, filter = is.integer)
-```
-
-    #> [1] "Ozone"   "Solar.R" "Temp"    "Month"   "Day"
-
-``` r
-find_data_vars(data = state.abb, filter = is.character)
-```
-
-    #> Error in find_data_vars(data = state.abb, filter = is.character): is.data.frame(data) is not TRUE
 
 ## `testServer()` tests
 

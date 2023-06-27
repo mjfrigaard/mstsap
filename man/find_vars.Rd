@@ -15,5 +15,11 @@ find_vars(data, filter)
 variable names
 }
 \description{
-This function comes from the \href{https://mastering-shiny.org/scaling-modules.html#case-study-selecting-a-numeric-variable}{Case study: selecting a numeric variable} section of Mastering Shiny.
+This function is covered in the \href{https://mastering-shiny.org/scaling-modules.html#case-study-selecting-a-numeric-variable}{Case study: selecting a numeric variable} section of Mastering Shiny, then updated in the \href{https://mastering-shiny.org/scaling-modules.html#server-inputs}{Server inputs} section to include the \code{stopifnot()} checks.
 }
+\section{stopifnot()}{
+
+From the \href{https://mastering-shiny.org/scaling-modules.html#server-inputs}{Server inputs} section,
+\emph{"check that each input to your module is either reactive or constant. If you don’t, and the user supplies the wrong type, they’ll get a cryptic error message. You can make the life of module user much easier with a quick and dirty call to \code{stopifnot()}."} Read more at \href{https://mastering-shiny.org/}{mastering-shiny.org}.
+}
+

@@ -2,7 +2,7 @@
 % Please edit documentation in R/selectDataVarApp.R
 \name{DataVarServer}
 \alias{DataVarServer}
-\title{Data and variable shiny server}
+\title{Data and variable shiny server (version 2)}
 \usage{
 DataVarServer(input, output, session, filter = is.numeric)
 }
@@ -13,7 +13,7 @@ DataVarServer(input, output, session, filter = is.numeric)
 
 \item{session}{shiny server argument}
 
-\item{filter}{limit the options of built-in datasets (i.e., \code{is.data.frame} or \code{is.matrix})}
+\item{filter}{variable filter (i.e., \code{is.numeric} or \code{is.character})}
 }
 \value{
 shiny app

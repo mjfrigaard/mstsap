@@ -15,6 +15,8 @@
 selectVarInput <- function(id) {
 
   shiny::selectInput(
-    shiny::NS(id, "var"), label = "Variable", choices = NULL)
+    shiny::NS(id, "var"),
+    label = "Variable",
+    choices = NULL)
 
 }

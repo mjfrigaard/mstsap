@@ -2,8 +2,8 @@
     "sortOrder": [
         {
             "columnIndex": 2,
-            "ascending": false
+            "ascending": true
         }
     ],
-    "path": "~/projects/apps/mstsap"
+    "path": "~/projects/apps/mstsap/tests/testthat"
 }

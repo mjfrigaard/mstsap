@@ -17,7 +17,6 @@
 #' @importFrom shiny moduleServer observe updateSelectInput
 #' @importFrom shiny bindEvent reactive is.reactive
 selectVarServer <- function(id, data, filter = is.numeric) {
-
   stopifnot(shiny::is.reactive(data))
   stopifnot(!shiny::is.reactive(filter))
 

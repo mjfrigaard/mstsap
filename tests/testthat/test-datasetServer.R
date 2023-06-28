@@ -1,7 +1,7 @@
 shiny::testServer(datasetServer, expr = {
 
   testthat::expect_equal(input$dataset, NULL)
-  cat("\ndatasetServer: dataset$input is NULL", "\n")
+  test_cmt("datasetServer", "dataset$input is NULL")
 
   session$setInputs(dataset = "faithful")
   testthat::expect_equal(
@@ -9,14 +9,20 @@ shiny::testServer(datasetServer, expr = {
     expected = "faithful")
   test_cmt("datasetServer", "dataset$input")
 
-  session$setInputs(dataset = "mtcars")
-  testthat::expect_true(
-    object = is.data.frame(session$returned()))
-  # cat("\n\tdatasetServer: is.data.frame()")
-  test_cmt("datasetServer", "is.data.frame()")
+  session$setInputs(dataset = "airquality")
+  testthat::expect_equal(
+    object = class(session$returned()),
+    expected = "data.frame")
+  test_cmt("datasetServer", "class(session$returned())")
 
-  # session$setInputs(dataset = "mtcars")
-  # expect_equal(object = names(session$returned()),
-  #   expected = names(mtcars))
-  # cat("\n\tdatasetServer: names()", "\n")
+  session$setInputs(dataset = "WorldPhones")
+  testthat::expect_true(
+    object = is.matrix(session$returned()))
+  test_cmt("datasetServer", "is.matrix(session$returned())")
+
+  session$setInputs(dataset = "mtcars")
+  expect_equal(
+    object = typeof(session$returned()),
+    expected = typeof(datasets::mtcars))
+  test_cmt("datasetServer", "typeof(session$returned())")
 })

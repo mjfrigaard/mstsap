@@ -5,5 +5,5 @@ pkgload::load_all(
   attach_testthat = TRUE)
 library(mstsap)
 # options(shiny.fullstacktrace = TRUE)
-mstsap::pkgDataApp()
+mstsap::selectDataVarApp()
 # rsconnect::deployApp()

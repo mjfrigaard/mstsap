@@ -6,10 +6,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `mstsap` (Mastering shiny `testServer()` app-package) is to
-demonstrate how to test a shiny application package using
-[`testthat`](https://testthat.r-lib.org/) and
-[`shiny::testServer()`](https://search.r-project.org/CRAN/refmans/shiny/html/testServer.html)
+`mstsap` (Mastering shiny `testServer()` app-package) is a collection of
+tests using [`testthat`](https://testthat.r-lib.org/) and
+[`shiny::testServer()`](https://search.r-project.org/CRAN/refmans/shiny/html/testServer.html).
+
+The modules and applications in `mstsap` come from the [Shiny modules
+chapter](https://mastering-shiny.org/scaling-modules.html) of [Mastering
+Shiny](https://mastering-shiny.org/index.html).
 
 ## Installation
 
@@ -19,6 +22,8 @@ post](https://mjfrigaard.github.io/posts/test-shiny-p3/) to learn about
 it’s contents).
 
 ``` r
+install.packages("remotes")
+remotes::install_github("mjfrigaard/mstsap")
 library(mstsap)
 ```
 
@@ -40,9 +45,11 @@ testthat::test_file("tests/testthat/test-find_vars.R")
 ## `testServer()` tests
 
     #> tests/testthat/
+    #> ├── test-datasetApp.R
     #> ├── test-datasetServer.R
     #> ├── test-selectDataVarApp.R
     #> ├── test-selectDataVarServer.R
+    #> ├── test-selectVarApp.R
     #> └── test-selectVarServer.R
 
 ``` default

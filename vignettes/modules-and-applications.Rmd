@@ -1,8 +1,8 @@
 ---
-title: "Inputs and outputs"
+title: "Modules and applications"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Inputs and outputs}
+  %\VignetteIndexEntry{Modules and applications}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

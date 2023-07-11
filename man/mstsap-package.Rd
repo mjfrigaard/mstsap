@@ -8,4 +8,11 @@
 \description{
 This shiny app-package if from Mastering Shiny and was developed to demonstrate testing with testthat and shiny's testServer().
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://mjfrigaard.github.io/mstsap/}
+}
+
+}
 \keyword{internal}

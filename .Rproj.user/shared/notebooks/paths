@@ -1,2 +1,7 @@
 /Users/mjfrigaard/projects/pkgs/apps/mstsap/DESCRIPTION="84DED5E6"
+/Users/mjfrigaard/projects/pkgs/apps/mstsap/R/datasetApp.R="C91C64B8"
+/Users/mjfrigaard/projects/pkgs/apps/mstsap/R/selectDataVarApp.R="80ACBFE3"
+/Users/mjfrigaard/projects/pkgs/apps/mstsap/app.R="2EDDE242"
+/Users/mjfrigaard/projects/pkgs/apps/mstsap/tests/testthat/test-datasetApp.R="0EA2E63F"
+/Users/mjfrigaard/projects/pkgs/apps/mstsap/tests/testthat/test-datasetServer.R="5AE5B64B"
 /Users/mjfrigaard/projects/pkgs/apps/mstsap/vignettes/inputs-outputs.Rmd="07303DE3"

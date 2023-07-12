@@ -1,0 +1,121 @@
+---
+title: "selectDataVarApp tests"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{selectDataVarApp tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5,
+  fig.height = 3.5,
+  dpi = 140,
+  fig.retina = TRUE
+)
+# remotes::install_github("r-lib/lobstr", force = TRUE, quiet = TRUE)
+# library(lobstr)
+```
+
+```{r}
+#| label: pkgs
+#| message: false
+#| warning: false
+library(mstsap)
+library(lobstr)
+library(testthat)
+```
+
+
+```{r}
+#| label: test_cmt 
+#| include: false
+test_cmt <- function(test, msg) {
+  cat("\n\t", glue::glue("  {test}: {msg}"), "\n")
+}
+
+```
+
+## selectDataVarServer()
+
+Test `is.reactive()` on `data`
+
+```{r}
+shiny::testServer(selectDataVarServer, 
+  args = list(filter = is.numeric), expr = {
+    
+  testthat::expect_true(
+    object = is.reactive(data))
+  test_cmt("selectDataVarServer", "is.reactive(data)")
+
+})
+```
+
+Test `is.reactive()` on `var`
+
+```{r}
+shiny::testServer(selectDataVarServer, 
+  args = list(filter = is.numeric), expr = {
+
+  testthat::expect_true(
+    object = is.reactive(var))
+  test_cmt("selectDataVarServer", "is.reactive(var)")
+
+})
+```
+
+
+## selectDataVarApp()
+
+Test inputs for `var-var-var`
+
+```{r}
+dv_app <- selectDataVarApp()
+shiny::testServer(app = dv_app, expr = {
+  session$setInputs(`var-var-var` = "Ozone",
+                    `var-data-dataset` = "airquality")
+
+  testthat::expect_equal(
+    object = input$`var-var-var`,
+    expected = "Ozone")
+  test_cmt("selectDataVarApp", "input$`var-var-var`")
+
+})
+```
+
+Test inputs for `var-data-dataset`
+
+```{r}
+dv_app <- selectDataVarApp()
+shiny::testServer(app = dv_app, expr = {
+  session$setInputs(`var-var-var` = "Ozone",
+                    `var-data-dataset` = "airquality")
+
+  testthat::expect_equal(
+    object = input$`var-data-dataset`,
+    expected = "airquality")
+  test_cmt("selectDataVarApp", "input$`var-data-dataset`")
+
+})
+```
+
+Test `is.reactive()` for `var`
+
+```{r}
+dv_app <- selectDataVarApp()
+shiny::testServer(app = dv_app, expr = {
+  session$setInputs(`var-var-var` = "Ozone",
+                    `var-data-dataset` = "airquality")
+
+  testthat::expect_true(object = is.reactive(var))
+  test_cmt("selectDataVarApp", "is.reactive(var)")
+
+})
+```
+

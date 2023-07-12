@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "palmerpenguins",
+        "query": "zeallot",
         "path": "",
         "regex": false,
         "caseSensitive": true,
@@ -9,7 +9,7 @@
         "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 5,
+        "resultsCount": 4,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true

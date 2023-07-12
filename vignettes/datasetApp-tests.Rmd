@@ -1,0 +1,168 @@
+---
+title: "datasetApp tests"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{datasetApp tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5,
+  fig.height = 3.5,
+  dpi = 140,
+  fig.retina = TRUE
+)
+# remotes::install_github("r-lib/lobstr", force = TRUE, quiet = TRUE)
+# library(lobstr)
+```
+
+```{r}
+#| label: pkgs
+#| message: false
+#| warning: false
+library(mstsap)
+library(lobstr)
+library(testthat)
+```
+
+
+```{r}
+#| label: test_cmt 
+#| include: false
+test_cmt <- function(test, msg) {
+  cat("\n\t", glue::glue("  {test}: {msg}"), "\n")
+}
+
+```
+
+## datasetServer() 
+
+Verify `NULL` 
+
+```{r}
+shiny::testServer(datasetServer, expr = {
+
+  testthat::expect_equal(input$dataset, NULL)
+  test_cmt("datasetServer", "dataset$input is NULL")
+})
+```
+
+Verify input 
+
+```{r}
+shiny::testServer(datasetServer, expr = {
+  session$setInputs(dataset = "faithful")
+  testthat::expect_equal(
+    object = input$dataset,
+    expected = "faithful")
+  test_cmt("datasetServer", "dataset$input")
+})
+```
+
+Verify `class()` of `returned()`
+
+```{r}
+class(datasets::airquality)
+```
+
+
+```{r}
+shiny::testServer(datasetServer, expr = {
+  session$setInputs(dataset = "airquality")
+  testthat::expect_equal(
+    object = class(session$returned()),
+    expected = "data.frame")
+  test_cmt("datasetServer", "class(session$returned())")
+})
+```
+
+Verify `class()` of `returned()`
+
+
+```{r}
+is.matrix(datasets::WorldPhones)
+```
+
+```{r}
+shiny::testServer(datasetServer, expr = {
+  session$setInputs(dataset = "WorldPhones")
+  testthat::expect_true(
+    object = is.matrix(session$returned()))
+  test_cmt("datasetServer", "is.matrix(session$returned())")
+})
+```
+
+Verify `typeof()` of `returned()`
+
+```{r}
+typeof(datasets::mtcars)
+```
+
+
+```{r}
+shiny::testServer(datasetServer, expr = {
+  session$setInputs(dataset = "mtcars")
+  expect_equal(
+    object = typeof(session$returned()),
+    expected = typeof(datasets::mtcars))
+  test_cmt("datasetServer", "typeof(session$returned())")
+})
+```
+
+## datasetApp()
+
+Check `dataset` input
+
+```{r}
+ds_app <- datasetApp()
+shiny::testServer(app = ds_app, expr = {
+  session$setInputs(`dataset-dataset` = "chickwts")
+  testthat::expect_equal(
+    object = input$`dataset-dataset`,
+    expected = "chickwts")
+  test_cmt("datasetApp", "input$`dataset-dataset`")
+})
+```
+
+Check `class` of reactive `data()`
+
+```{r}
+ds_app <- datasetApp()
+shiny::testServer(app = ds_app, expr = {
+  session$setInputs(`dataset-dataset` = "chickwts")
+  testthat::expect_true(
+    object = is.data.frame(data()))
+  test_cmt("datasetApp", "is.data.frame(data())")
+})
+```
+
+```{r}
+ds_app <- datasetApp()
+shiny::testServer(app = ds_app, expr = {
+  session$setInputs(`dataset-dataset` = "chickwts")
+  testthat::expect_equal(
+    object = names(data()),
+    expected = names(datasets::chickwts))
+  test_cmt("datasetApp", "names(data())")
+})
+```
+
+
+```{r}
+ds_app <- datasetApp()
+shiny::testServer(app = ds_app, expr = {
+  session$setInputs(`dataset-dataset` = "chickwts")
+  testthat::expect_equal(
+    object = class(output$data),
+    expected = "character")
+  test_cmt("datasetApp", "class(output$data)")
+
+})
+```

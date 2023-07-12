@@ -12,7 +12,7 @@ pkgs <- c("askpass", "base64enc", "brio", "bslib", "cachem", "callr",
 "scales", "shiny", "shinytest2", "snakecase", "sourcetools",
 "stringi", "stringr", "sys", "testthat", "tibble", "tidyr", "tidyselect",
 "timechange", "tinytex", "utf8", "vctrs", "vdiffr", "viridisLite",
-"waldo", "withr", "xfun", "xml2", "xtable", "yaml", "zeallot"
+"waldo", "withr", "xfun", "xml2", "xtable", "yaml"
 )
 
 # pkgs <- sort(unique(pkgs))

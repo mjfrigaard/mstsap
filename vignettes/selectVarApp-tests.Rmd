@@ -1,0 +1,239 @@
+---
+title: "selectVarApp tests"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{selectVarApp tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5,
+  fig.height = 3.5,
+  dpi = 140,
+  fig.retina = TRUE
+)
+# remotes::install_github("r-lib/lobstr", force = TRUE, quiet = TRUE)
+# library(lobstr)
+```
+
+```{r}
+#| label: pkgs
+#| message: false
+#| warning: false
+library(mstsap)
+library(lobstr)
+library(testthat)
+```
+
+
+```{r}
+#| label: test_cmt 
+#| include: false
+test_cmt <- function(test, msg) {
+  cat("\n\t", glue::glue("  {test}: {msg}"), "\n")
+}
+
+```
+
+## find_vars()
+
+Test function (`is.double`)
+
+```{r}
+testthat::test_that("find_vars", {
+    testthat::expect_equal(
+    object = find_vars(datasets::airquality,
+                            filter = is.double),
+    expected = names(airquality)[vapply(airquality, is.double, logical(1))])
+    test_cmt("find_vars", "is.double()")
+})
+```
+
+Test function (`is.character`)
+
+```{r}
+testthat::test_that("find_vars", {
+  testthat::expect_equal(
+    object = find_vars(datasets::mtcars,
+                            filter = is.character),
+    expected = datasets::mtcars |>
+      dplyr::select(where(is.character)) |>
+      names())
+  test_cmt("find_vars", "is.character()")
+})
+```
+
+Test error: `state.abb` is a vector--pass `is.character` function to `filter`
+
+```{r}
+#| error: true
+find_vars(data = datasets::state.abb, is.character)
+```
+
+
+```{r}
+testthat::test_that("find_vars", {
+  testthat::expect_error(object =
+      find_vars(datasets::state.abb, filter = is.character))
+  test_cmt("find_vars", "error: data")
+})
+```
+
+Test error: pass `is.miracle` function to `filter`
+
+```{r}
+#| error: true
+find_vars(data = datasets::mtcars, is.miracle)
+```
+
+
+```{r}
+testthat::test_that("find_vars", {
+  testthat::expect_error(object =
+      find_vars(datasets::mtcars, filter = is.miracle))
+  test_cmt("find_vars", "error: filter")
+
+})
+```
+
+## selectVarServer() 
+
+The `selectVarServer()` function has additional arguments, so the `args` list is used (with `reactive()`):
+
+```{r}
+shiny::testServer(selectVarServer,
+
+  args = list(data = reactive(datasets::mtcars),
+              filter = is.numeric), expr = {
+
+  testthat::expect_true(
+    object = is.reactive(data))
+  test_cmt("selectVarServer", "is.reactive(data())")
+})
+```
+
+Test passing different arguments to `find_vars()`
+
+```{r}
+shiny::testServer(selectVarServer,
+  args = list(data = reactive(datasets::chickwts),
+              filter = is.numeric), expr = {
+  testthat::expect_equal(
+    object = find_vars(data(), is.factor),
+    expected = "feed")
+  test_cmt("selectVarServer", "find_vars()")
+})
+```
+
+Test passing `filter` and setting `input$var`:
+
+```{r}
+shiny::testServer(selectVarServer,
+  args = list(data = reactive(datasets::chickwts),
+              filter = is.numeric), expr = {
+
+  session$setInputs(var = "weight")
+  testthat::expect_equal(object = input$var,
+      expected = "weight")
+  test_cmt("selectVarServer", "input$var")
+})
+```
+
+Test passing `filter`, setting `input$var`, and `session$returned()`:
+
+```{r}
+shiny::testServer(selectVarServer,
+  args = list(data = shiny::reactive(datasets::chickwts),
+              filter = is.numeric), expr = {
+  session$setInputs(var = "feed")
+  testthat::expect_equal(object = session$returned(),
+      expected = datasets::chickwts[["feed"]])
+  test_cmt("selectVarServer", "session$returned()")
+
+})
+```
+
+
+## selectVarApp()
+
+Test `is.reactive(var)`
+
+```{r}
+sv_app <- selectVarApp()
+shiny::testServer(app = sv_app, expr = {
+  session$setInputs(`var-var` = "Ozone",
+                    `data-dataset` = "airquality")
+  
+  testthat::expect_true(object = is.reactive(var))
+  test_cmt("selectVarApp", "is.reactive(var)")
+})
+```
+
+Test the inputs with module namespaces 
+
+```{r}
+sv_app <- selectVarApp()
+shiny::testServer(app = sv_app, expr = {
+  session$setInputs(`var-var` = "Ozone",
+                    `data-dataset` = "airquality")
+
+  testthat::expect_equal(
+    object = input$`var-var`,
+    expected = "Ozone")
+  test_cmt("selectVarApp", "input$`var-var`")
+
+})
+```
+
+Test `data()` is reactive
+
+```{r}
+sv_app <- selectVarApp()
+shiny::testServer(app = sv_app, expr = {
+  session$setInputs(`var-var` = "Ozone",
+                    `data-dataset` = "airquality")
+
+  testthat::expect_true(object = is.reactive(data))
+  test_cmt("selectVarApp", "is.reactive(data)")
+
+})
+```
+
+Test `class()` of `data()`
+
+```{r}
+sv_app <- selectVarApp()
+shiny::testServer(app = sv_app, expr = {
+  session$setInputs(`var-var` = "Ozone",
+                    `data-dataset` = "airquality")
+  
+  testthat::expect_true(
+    object = is.data.frame(data()))
+  test_cmt("selectVarApp", "is.data.frame(data())")
+
+})
+```
+
+Test specific variables from `data()`
+
+```{r}
+sv_app <- selectVarApp()
+shiny::testServer(app = sv_app, expr = {
+  session$setInputs(`var-var` = "Ozone",
+                    `data-dataset` = "airquality")
+
+  testthat::expect_equal(
+    object = data()[[input$`var-var`]],
+    expected = airquality[["Ozone"]])
+  test_cmt("selectVarApp", "data()[[input$`var-var`]]")
+
+})
+```

@@ -27,8 +27,7 @@
 "testthat", "textshaping", "tibble", "tidyr", "timechange", "tinytex",
 "urlchecker", "usethis", "utf8", "uuid", "vctrs", "vdiffr", "viridisLite",
 "waldo", "webdriver", "webshot", "websocket", "whisker", "whoami",
-"withr", "xfun", "xml2", "xmlparsedata", "xopen", "xtable", "yaml",
-"zeallot", "zip")
+"withr", "xfun", "xml2", "xmlparsedata", "xopen", "xtable", "yaml", "zip")
 
 # install.packages("Matrix")
 # https://cran.r-project.org/web/packages/Matrix/index.html

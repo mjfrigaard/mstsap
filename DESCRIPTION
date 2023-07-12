@@ -29,6 +29,5 @@ Imports:
     stringr,
     testthat,
     lobstr,
-    remotes,
-    zeallot
+    remotes
 URL: https://mjfrigaard.github.io/mstsap/

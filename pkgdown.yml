@@ -2,8 +2,11 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  datasetApp-tests: datasetApp-tests.html
   modules-and-applications: modules-and-applications.html
-last_built: 2023-07-12T13:14Z
+  selectDataVarApp-tests: selectDataVarApp-tests.html
+  selectVarApp-tests: selectVarApp-tests.html
+last_built: 2023-07-12T16:29Z
 urls:
   reference: https://mjfrigaard.github.io/mstsap/reference
   article: https://mjfrigaard.github.io/mstsap/articles

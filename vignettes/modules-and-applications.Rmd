@@ -26,7 +26,245 @@ knitr::opts_chunk$set(
 #| message: false
 #| warning: false
 library(mstsap)
-library(janitor)
-library(palmerpenguins)
+library(lobstr)
+library(fs)
 ```
+
+This vignette covers the standalone shiny apps in the `mstsap` package.
+
+## Apps from Mastering Shiny
+
+Three of the applications in the `mstsap` package come from the [Modules section of Mastering Shiny](https://mastering-shiny.org/scaling-modules.html):
+
+### `datasetApp()`
+
+-   **`datasetApp()` contains the `datasetInput()` and `datasetServer()` module functions**
+
+    -   `datasetInput()` displays the objects from the `datasets` package (`"dataset"`) matching `filter` argument (i.e., `is.data.frame`, `is.matrix`) and the table output (`"data"`) in the UI
+   
+    -   The `inputId` in the UI passes a `datasets` object (as `input$dataset`, a character string) to `datasetServer()`, which fetches and returns the object as a reactive via `get()` 
+    
+```{verbatim}
+#| eval: false 
+#| echo: true
+█─datasetApp 
+├─filter = NULL 
+└─█─shinyApp 
+  ├─ui = █─fluidPage 
+  │      ├─█─datasetInput 
+  │      │ ├─id = "dataset" 
+  │      │ ├─filter = is.data.frame 
+  │      │ └─█─selectInput 
+  │      │   └─inputId = "dataset" 
+  │      └─█─tableOutput 
+  │        └─"data"
+  └─server = █─function(input, output, session)
+             └─█─data <- datasetServer(id = "dataset") 
+               └─output$data <- renderTable(head(data()))
+```
+
+#### Reactive values 
+
+The output from `reactiveValuesToList()` are displayed in the dev version of this application: 
+
+```
+$`dataset-dataset`
+[1] "ability.cov"
+```
+
+The first `dataset` is from the module `id`, and the second is from the `inputId` (in the `selectInput()`).
+
+<!--
+    
+```{r}
+#| echo: false 
+#| eval: false
+#| comment: ""
+#| include: true
+lobstr::ast(
+  datasetApp(filter = NULL,
+    shinyApp(
+      ui = fluidPage(
+            datasetInput(id = "dataset", filter = filter,
+              selectInput(inputId = "dataset")
+              ),
+            tableOutput("data")),
+  server = function(`input, output, session`) {
+    `data <- datasetServer(id = "dataset")`
+    `output$data <- renderTable(head(data()))`
+    }
+   )
+  )
+)
+```
+
+-->
+    
+### `selectVarApp()`
+
+-   **`selectVarApp()` contains the `datasetInput()`/`Server()` and `selectVarInput()`/`Server()` modules**
+    - **`dataset` module:**
+      -   [x] `datasetInput()` displays the objects from the `datasets` package (`"dataset"`) matching `filter` argument (i.e., `is.data.frame`, `is.matrix`) and the table output (`"data"`) in the UI
+    
+      -   [x] The `inputId` in the UI passes a `datasets` object (as `input$dataset`, a character string) to `datasetServer()`, which fetches and returns the object as a reactive with `get()`
+    - **`selectVar` module:**
+      -   `selectVarInput()` displays the variables (columns) in the returned `datasets` object from `datasetServer()` (as `"var"`) and the rendered output (as `"out"`)
+    
+      -   In `selectVarServer()`, the columns in the `data` returned from `datasetServer()` is filtered to those columns matching the `filter` argument (i.e., `is.numeric`), and the selected `"var"` is displayed in `"out"`
+
+```{verbatim}
+#| eval: false 
+#| echo: true
+█─selectVarApp 
+└─█─shinyApp 
+  ├─ui = █─fluidPage 
+  │      ├─█─datasetInput 
+  │      │ ├─id = "data" 
+  │      │ ├─filter = is.data.frame
+  │      │ └─█─selectInput 
+  │      │   └─inputId = "dataset" 
+  │      ├─█─selectVarInput 
+  │      │ ├─id = "var" 
+  │      │ └─█─selectInput 
+  │      │   └─inputId = "var" 
+  │      └─█─tableOutput 
+  │        └─"out" 
+  └─server = █─function(input, output, session)
+             └─█─data <- datasetServer("data")
+               █─var <- selectVarServer("var", data, filter = is.numeric)
+               └─output$out <- renderTable(head(var()))
+             
+```
+
+
+#### Reactive values 
+
+The output from `reactiveValuesToList()` for both modules are displayed in the dev version of the application:
+
+```
+$`var-var`
+[1] "Ozone"
+
+$`data-dataset`
+[1] "airquality"
+```
+
+- The first `"var"` is from the `selectVar` module `id`, the second is from the `selectInput()`
+
+- `"data"` is from the `dataset` module `id`, the second is from the `selectInput()`
+
+<!--
+
+```{r}
+#| echo: false 
+#| eval: false
+#| comment: ""
+#| include: true
+lobstr::ast(
+  selectVarApp(
+    shinyApp(
+      ui = fluidPage(
+
+      datasetInput(id = "data", filter = is.data.frame),
+
+      selectVarInput(id = "var"),
+
+      verbatimTextOutput("out")
+        
+  ), 
+      server = function(`input, output, session`) {
+        
+        `data <- datasetServer("data")`
+        
+        `var <- selectVarServer("var", data, filter = filter)`
+
+        `output$out <- renderPrint(head(var()))`
+        
+        }
+      )
+    )
+  )
+```
+
+-->
+
+### `selectDataVarApp()`
+
+-   **`selectDataVarApp()` nests the `dataset` and `selectVar` modules *inside* the `selectDataVarUI()` and `selectDataVarServer()` functions:**
+    - **`dataset` module:**
+      -   [x] `datasetInput()` displays the objects from the `datasets` package (`"dataset"`) matching `filter` argument (i.e., `is.data.frame`, `is.matrix`) and the table output (`"data"`) in the UI
+    
+      -   [x] The `inputId` in the UI passes a `datasets` object (as `input$dataset`, a character string) to `datasetServer()`, which fetches and returns the object as a reactive with `get()`
+    - **`selectVar` module:**
+      -   [x] `selectVarInput()` displays the variables (columns) in the returned `datasets` object from `datasetServer()` (as `"var"`) and the rendered output (as `"out"`)
+    
+      -   [x] In `selectVarServer()`, the columns in the `data` returned from `datasetServer()` is filtered to those columns matching the `filter` argument (i.e., `is.numeric`), and the selected `"var"` is displayed in `"out"`
+
+```{verbatim}
+#| eval: false 
+#| echo: true
+█─selectDataVarApp 
+└─█─shinyApp 
+  ├─ui = █─fluidPage 
+  │      └─█─sidebarLayout 
+  │        ├─█─sidebarPanel 
+  │        │ └─█─selectDataVarUI 
+  │        │   ├─"var" 
+  │        │   ├─█─datasetInput 
+  │        │   │ ├─█─NS 
+  │        │   │ │ ├─id 
+  │        │   │ │ └─"data" 
+  │        │   │ └─filter = is.data.frame 
+  │        │   └─█─selectVarInput 
+  │        │     └─█─NS 
+  │        │       ├─id 
+  │        │       └─"var" 
+  │        └─█─mainPanel 
+  │          └─█─verbatimTextOutput 
+  │            └─"out" 
+  └─server = █─function(input, output, session)
+             ├─█─var <- selectDataVarServer(id = "var", filter = is.numeric)
+             │ ├─data <- datasetServer(id = "data")
+             │ ├─var <- selectVarServer(id = "var", data, filter = filter) 
+             │ └─var 
+             └─output$out <- renderPrint(head(var()))
+```
+
+<!--
+
+```{r}
+#| echo: false 
+#| eval: false
+#| comment: ""
+#| include: true
+lobstr::ast(
+selectDataVarApp(
+  shinyApp(
+    ui = fluidPage(
+    sidebarLayout(
+      sidebarPanel(
+        selectDataVarUI("var",
+          datasetInput(NS(id, "data"), filter = is.data.frame),
+          selectVarInput(NS(id, "var"))
+          )
+        ),
+      mainPanel(
+        verbatimTextOutput("out")
+        )
+    )
+  ),
+    
+  server = function(`input, output, session`) {
+
+    `var <- selectDataVarServer("var", filter)`(`data <- datasetServer("data")`,
+      `var <- selectVarServer("var", data, filter = filter)`, `var`)
+    `output$out <- renderPrint(head(var()))`
+
+  }
+  )
+  ))
+```
+-->
+
+
 

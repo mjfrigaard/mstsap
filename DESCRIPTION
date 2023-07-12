@@ -30,5 +30,6 @@ Imports:
     shiny,
     stringr,
     testthat,
+    lobstr,
     zeallot
 URL: https://mjfrigaard.github.io/mstsap/

@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
   dpi = 140,
   fig.retina = TRUE
 )
+remotes::install_github("r-lib/lobstr", force = TRUE, quiet = TRUE)
+library(lobstr)
 ```
 
 ```{r}

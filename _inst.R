@@ -14,7 +14,7 @@
 "later", "lattice", "lazyeval", "leprechaun", "lifecycle", "lintr",
 "lobstr", "logger", "lubridate", "magrittr", "markdown", "memoise",
 "mime", "miniUI", "modelr", "munsell", "nlme", "openssl", "packer",
-"palmerpenguins", "parsedate", "pillar", "pingr", "pkgbuild",
+ "parsedate", "pillar", "pingr", "pkgbuild",
 "pkgconfig", "pkgdown", "pkgload", "png", "praise", "prettyunits",
 "processx", "profvis", "promises", "proto", "ps", "purrr", "R.cache",
 "R.methodsS3", "R.oo", "R.utils", "R6", "ragg", "rappdirs", "rcmdcheck",

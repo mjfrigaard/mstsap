@@ -40,16 +40,6 @@
       ],
       "Hash": "4006dffe49958d2dd591c17e61e60591"
     },
-    "NHANES": {
-      "Package": "NHANES",
-      "Version": "2.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "f4790d414da5d19e6031e8d1564f227c"
-    },
     "R6": {
       "Package": "R6",
       "Version": "2.5.1",
@@ -643,9 +633,14 @@
     },
     "lobstr": {
       "Package": "lobstr",
-      "Version": "1.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "1.1.2.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "lobstr",
+      "RemoteUsername": "r-lib",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "d9ea7fb56632590f66bc4cb41f0d0a97875607c1",
       "Requirements": [
         "R",
         "cpp11",
@@ -654,7 +649,7 @@
         "prettyunits",
         "rlang"
       ],
-      "Hash": "f2a94f8fc9db382a642e965339635ad6"
+      "Hash": "e7fc3fa5cd6f0ed25566c1fc083a15e1"
     },
     "lubridate": {
       "Package": "lubridate",
@@ -763,16 +758,6 @@
         "utils"
       ],
       "Hash": "481428983c19a7c443f7ea1beff0a2de"
-    },
-    "palmerpenguins": {
-      "Package": "palmerpenguins",
-      "Version": "0.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "6c6861efbc13c1d543749e9c7be4a592"
     },
     "pillar": {
       "Package": "pillar",
@@ -949,6 +934,20 @@
         "tibble"
       ],
       "Hash": "76c9e04c712a05848ae7a23d2f170a40"
+    },
+    "remotes": {
+      "Package": "remotes",
+      "Version": "2.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "methods",
+        "stats",
+        "tools",
+        "utils"
+      ],
+      "Hash": "227045be9aee47e6dda9bb38ac870d67"
     },
     "renv": {
       "Package": "renv",

@@ -24,12 +24,11 @@ Imports:
     rlang,
     ggplot2,
     janitor,
-    NHANES,
-    palmerpenguins,
     rsconnect,
     shiny,
     stringr,
     testthat,
     lobstr,
+    remotes,
     zeallot
 URL: https://mjfrigaard.github.io/mstsap/

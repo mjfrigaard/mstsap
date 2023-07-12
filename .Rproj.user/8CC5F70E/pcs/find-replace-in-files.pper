@@ -1,6 +1,6 @@
 {
     "dialog-state": {
-        "query": "find_data_vars",
+        "query": "palmerpenguins",
         "path": "",
         "regex": false,
         "caseSensitive": true,
@@ -9,7 +9,7 @@
         "useGitGrep": true,
         "excludeGitIgnore": true,
         "excludeFilePatterns": [],
-        "resultsCount": 21,
+        "resultsCount": 5,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true
